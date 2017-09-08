@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'head.html' %}
+</head>
+
+<body>
+  {% include 'nav.html' %}
+  <div class="container">
+
+    <div class="image-panel">
+      <h3 class="content-header">Images for condition {{condition_number}}, Number of stacks = {{ n_stacks }}</h3>
+
+      <div class="image-content">
+        <!-- add patient id here -->
+        <div class="col-md-6">
+          <img id="sliced-img" src="{{ url_for('static', filename='images/' + condition_number + '/2.jpg')}}">
+          <div class="slider-panel col-md-12">
+            <!-- slider -->
+            <input id="slider-tag" data-slider-id='slider-tag' type="text"
+            data-slider-min="1" data-slider-max="{{n_stacks}}" data-slider-step="1" data-slider-value="14"/>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+
+<script>
+let slider = new Slider('#slider-tag', {
+	formatter: function(value) {
+    updateSlice(value);
+		return 'Current layer: ' + value;
+	}
+});
+
+function getRootForPatID() {
+  let srcSplited = document.getElementById("sliced-img").src.split('/');
+  let rootId = srcSplited.slice(0, srcSplited.length - 1).join('/') + '/';
+  return rootId;
+}
+
+function updateSlice(newSlice) {
+  const slicedImg = document.getElementById("sliced-img");
+  slicedImg.src = getRootForPatID() + newSlice + '.jpg';
+}
+</script>
+
+</html>

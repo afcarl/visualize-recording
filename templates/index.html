@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'head.html' %}
+</head>
+
+
+<body>
+  {% include 'nav.html' %}
+
+  <div class="container">
+    <h1><b>Visualizing High Density Array</b></h1><br>
+
+    <ul>
+    {% for condition in conditions %}
+      <li><a href="{{ condition }}">{{condition}}</a></li>
+    {% endfor %}
+    </ul>
+
+  </div>
+
+</body>
+</html>
